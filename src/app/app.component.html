@@ -1,0 +1,92 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1 class="header">
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<div>
+  <form>
+    <label>
+      <input (click)="showAllTodos()" name="show" type="radio">Show all
+    </label>
+    <br>
+    <label>
+      <input (click)="showUndone()" name="show" type="radio">Show only undone
+    </label>
+  </form>
+
+
+  <div class="modal" [ngStyle]="overlay">
+    <div class="modal-content">
+      <span class="close" (click)="hideOverlay()">&times;</span>
+      <form>
+        Assigned to:
+        <br>
+        <input type="text" [(ngModel)]="assignedTo" name="assignedTo">
+        <br> Description:
+        <br>
+        <textarea [(ngModel)]="desc" type="text" name="desc"></textarea>
+
+        <br> Done:
+        <br>
+        <select (change)="changeDone($event)">
+          <option></option>
+          <option>False</option>
+          <option>True</option>
+        </select>
+        <button (click)="postNewTodo()" type="button">Add</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" [ngStyle]="overlay">
+    <div class="modal-content">
+      <span class="close" (click)="hideOverlay()">&times;</span>
+      <form>
+        Assigned to:
+        <br>
+        <input type="text" [(ngModel)]="assignedTo" name="assignedTo">
+        <button (click)="postNewTodo()" type="button">Add</button>
+      </form>
+    </div>
+  </div>
+
+  <select (change)="filterByPerson($event)">
+    <option></option>
+    <option *ngFor="let person of people">{{person.name}}</option>
+  </select>
+
+  <button (click)="openCollapsible()" class="collapsible">Open Collapsible</button>
+  <div class="content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+      aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </div>
+
+  <button (click)="showOverlay()">Add new Todo</button>
+
+  <table border="1" id="table">
+    <th>
+      Todo
+    </th>
+    <th>
+      Assigned Person
+    </th>
+    <th>
+      Done
+    </th>
+
+    <tr *ngFor="let todo of todoList">
+      <td>
+        {{todo.description}}
+      </td>
+      <td>
+        {{todo.assignedTo}}
+      </td>
+      <td>
+        {{todo.done}}
+      </td>
+    </tr>
+  </table>
+
+</div>
